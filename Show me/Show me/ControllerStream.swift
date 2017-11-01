@@ -10,6 +10,7 @@ import UIKit
 import GPUImage
 import HaishinKit
 import GPUHaishinKit
+import AVFoundation
 
 struct Preference {
     static let defaultInstance:Preference = Preference()
@@ -43,6 +44,14 @@ class ControllerStream: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        do {
+            try AVAudioSession.sharedInstance().setPreferredSampleRate(44_100)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try AVAudioSession.sharedInstance().setMode(AVAudioSessionModeDefault)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+        }
+        
         if let camera = camera {
             rtmpStream?.attachGPUImageVideoCamera(camera)
         }
@@ -50,6 +59,11 @@ class ControllerStream: UIViewController {
         rtmpStream?.videoSettings = [
             "width": 720,
             "height": 1280,
+        ]
+        rtmpStream?.audioSettings = [
+            "muted": false, // mute audio
+            "bitrate": 32 * 1024,
+            "sampleRate": sampleRate,
         ]
         camera?.addTarget(filter!)
         filter?.addTarget(streamPreview)
