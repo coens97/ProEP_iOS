@@ -26,7 +26,7 @@ class ControllerStream: UIViewController {
     var streaming = false
     
     var camera:GPUImageVideoCamera?
-    var filter:GPUImageSepiaFilter?
+    var filter:GPUImageFilter?
     var rtmpConnection:RTMPConnection?
     var rtmpStream:RTMPStream?
     
@@ -39,7 +39,7 @@ class ControllerStream: UIViewController {
         camera = GPUImageVideoCamera(sessionPreset: AVCaptureSession.Preset.hd1280x720.rawValue, cameraPosition: .back)
         rtmpConnection = RTMPConnection()
         rtmpStream = RTMPStream(connection: rtmpConnection!)
-        filter = GPUImageSepiaFilter()
+        filter = GPUImageFilter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,11 +59,6 @@ class ControllerStream: UIViewController {
         rtmpStream?.videoSettings = [
             "width": 720,
             "height": 1280,
-        ]
-        rtmpStream?.audioSettings = [
-            "muted": false, // mute audio
-            "bitrate": 32 * 1024,
-            "sampleRate": sampleRate,
         ]
         camera?.addTarget(filter!)
         filter?.addTarget(streamPreview)
