@@ -1,0 +1,21 @@
+PODS:
+  - GPUHaishinKit (1.2.0):
+    - GPUImage (~> 0.1.7)
+    - HaishinKit (~> 0.8.0)
+  - GPUImage (0.1.7)
+  - HaishinKit (0.8.3):
+    - Logboard (~> 1.1.2)
+  - Logboard (1.1.2)
+
+DEPENDENCIES:
+  - GPUHaishinKit (~> 1.2.0)
+
+SPEC CHECKSUMS:
+  GPUHaishinKit: 1a8866b6e964e7717e374beea30c21abd103212e
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  HaishinKit: d159f2153ad5b11face6339f0f7143d09af04c0e
+  Logboard: 244a0d49318ad143c435d8ed883a2631fa0215c2
+
+PODFILE CHECKSUM: 686ec9d4fd155ea0ecd1e90cb4da8f0f18f3467d
+
+COCOAPODS: 1.2.1

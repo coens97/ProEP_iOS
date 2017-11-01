@@ -1,0 +1,6 @@
+framework module GPUHaishinKit {
+  umbrella header "GPUHaishinKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
