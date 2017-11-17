@@ -88,6 +88,10 @@ class ControllerStream: UIViewController {
         }
     }
     
+    @IBAction func switchedClicked(_ sender: Any) {
+        camera!.rotateCamera()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         rtmpStream?.close()
         rtmpStream?.dispose()
