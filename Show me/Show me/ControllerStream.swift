@@ -141,23 +141,23 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
     
     func runSocket() {
         
-        let socketClient = manager.defaultSocket
+        self.socketClient = manager.defaultSocket
         
-        socketClient.on(clientEvent: .connect) {data, ack in
+        self.socketClient!.on(clientEvent: .connect) {data, ack in
             print("socket connected")
             self.socketLabel!.text = "💯"
         }
         
-        socketClient.on(clientEvent: .disconnect) {data, ack in
+        self.socketClient!.on(clientEvent: .disconnect) {data, ack in
             print("socket disconnected")
             self.socketLabel!.text = "🔴"
         }
-        socketClient.on(clientEvent: .error) {data, ack in
+        self.socketClient!.on(clientEvent: .error) {data, ack in
             print("socket error")
             print(data)
             self.socketLabel!.text = "😓"
         }
-        socketClient.connect()
+        self.socketClient!.connect()
     }
     
     @objc func timerAction() {
@@ -183,7 +183,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
         if streaming {
             let json =  ["location": ["long": coord.longitude.magnitude, "lat": coord.latitude.magnitude]]
             print(json)
-            socketClient?.emit("phonemeta", json) // send location
+            socketClient!.emit("phonemeta", json) // send location
         }
     }
     /*
