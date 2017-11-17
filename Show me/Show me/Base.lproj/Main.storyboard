@@ -80,13 +80,29 @@
                                     <action selector="switchedClicked:" destination="Sma-7i-gDO" eventType="touchDown" id="36A-Jo-I6z"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="🔴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0t-iR-TYZ">
+                                <rect key="frame" x="87" y="622" width="27" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="🔴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbB-eS-DvL">
+                                <rect key="frame" x="127" y="622" width="27" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="oKa-tf-hNN"/>
                     </view>
                     <connections>
+                        <outlet property="socketLabel" destination="KbB-eS-DvL" id="qSC-SQ-8Zo"/>
                         <outlet property="startButton" destination="xrD-np-PpD" id="1Hk-cu-949"/>
                         <outlet property="streamPreview" destination="jbx-Ot-dOw" id="uYP-8R-ab2"/>
+                        <outlet property="videoLabel" destination="a0t-iR-TYZ" id="wi4-Of-JCt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRu-Ti-xze" userLabel="First Responder" sceneMemberID="firstResponder"/>

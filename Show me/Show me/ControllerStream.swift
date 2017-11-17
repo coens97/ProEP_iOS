@@ -11,24 +11,31 @@ import GPUImage
 import HaishinKit
 import GPUHaishinKit
 import AVFoundation
+import SocketIO
+import CoreLocation
 
 struct Preference {
     static let defaultInstance:Preference = Preference()
     
     var uri:String? = "rtmp://40.68.124.79:1984/show"
+    var socketUri:String? = "http://40.68.124.79:1903/"
     var streamName:String? = "stream"
 }
 
-class ControllerStream: UIViewController {
+class ControllerStream: UIViewController, CLLocationManagerDelegate{
     @IBOutlet var startButton: UIButton!
     @IBOutlet var streamPreview: GPUImageView!
-    
+    @IBOutlet var videoLabel: UILabel!
+    @IBOutlet var socketLabel: UILabel!
     var streaming = false
     
     var camera:GPUImageVideoCamera?
     var filter:GPUImageFilter?
     var rtmpConnection:RTMPConnection?
     var rtmpStream:RTMPStream?
+    var socketClient:SocketIOClient?
+    var timer = Timer()
+    var locationManager = CLLocationManager()
     
     var output:GPUImageRawDataOutput!
     
@@ -40,6 +47,16 @@ class ControllerStream: UIViewController {
         rtmpConnection = RTMPConnection()
         rtmpStream = RTMPStream(connection: rtmpConnection!)
         filter = GPUImageFilter()
+        // ask for permissions for location
+        locationManager.delegate = self
+        
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+        
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +82,8 @@ class ControllerStream: UIViewController {
         filter?.addTarget(rtmpStream!.rawDataOutput)
         camera?.outputImageOrientation = .portrait
         camera?.startCapture()
+        // Start socket
+        runSocket()
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,13 +97,15 @@ class ControllerStream: UIViewController {
             startButton.setTitle("Start", for:  UIControlState())
             rtmpConnection?.close()
             rtmpConnection?.removeEventListener(Event.RTMP_STATUS, selector:#selector(ControllerStream.on(status:)), observer: self)
-            
+            timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)// run the timer to send metadata
+            self.videoLabel!.text = "🔴"
         }
         else {
             streaming = true
             startButton.setTitle("Stop", for:  UIControlState())
             rtmpConnection?.addEventListener(Event.RTMP_STATUS, selector:#selector(ControllerStream.on(status:)), observer: self)
             rtmpConnection?.connect(Preference.defaultInstance.uri!)
+            timer.invalidate()
         }
     }
     
@@ -107,13 +128,62 @@ class ControllerStream: UIViewController {
         }
         switch code {
         case RTMPConnection.Code.connectSuccess.rawValue:
+            DispatchQueue.main.async {
+                self.videoLabel!.text = "💯"
+            }
             rtmpStream!.publish(Preference.defaultInstance.streamName!)
+            break
         default:
             break
         }
     }
     
+    func runSocket() {
+        let manager = SocketManager(socketURL: URL(string: Preference.defaultInstance.socketUri!)!, config: [.log(true), .compress])
+        let socketClient = manager.defaultSocket
+        
+        socketClient.on(clientEvent: .connect) {data, ack in
+            print("socket connected")
+            self.socketLabel!.text = "💯"
+        }
+        
+        socketClient.on(clientEvent: .disconnect) {data, ack in
+            print("socket disconnected")
+            self.socketLabel!.text = "🔴"
+        }
+        socketClient.on(clientEvent: .error) {data, ack in
+            print("socket error")
+            print(data)
+            self.socketLabel!.text = "😓"
+        }
+        socketClient.connect()
+    }
     
+    @objc func timerAction() {
+        // timer that doesn't do anything 👀👀
+    }
+    
+    /*func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
+    {
+        locationManager.stopUpdatingLocation()
+        if ((error) != nil)
+        {
+            print(error)
+        }
+    }*/
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let locationArray = locations as NSArray
+        let locationObj = locationArray.lastObject as! CLLocation
+        let coord = locationObj.coordinate
+        print(coord.latitude)
+        print(coord.longitude)
+        if streaming {
+            let json =  ["location": ["long": coord.longitude.magnitude, "lat": coord.latitude.magnitude]]
+            socketClient?.emit("phonemeta", json) // send location
+        }
+    }
     /*
     // MARK: - Navigation
 

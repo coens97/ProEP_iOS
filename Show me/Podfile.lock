@@ -6,16 +6,22 @@ PODS:
   - HaishinKit (0.8.3):
     - Logboard (~> 1.1.2)
   - Logboard (1.1.2)
+  - Socket.IO-Client-Swift (13.0.1):
+    - Starscream (~> 3.0.2)
+  - Starscream (3.0.2)
 
 DEPENDENCIES:
   - GPUHaishinKit (~> 1.2.0)
+  - Socket.IO-Client-Swift (~> 13.0.1)
 
 SPEC CHECKSUMS:
   GPUHaishinKit: 1a8866b6e964e7717e374beea30c21abd103212e
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HaishinKit: d159f2153ad5b11face6339f0f7143d09af04c0e
   Logboard: 244a0d49318ad143c435d8ed883a2631fa0215c2
+  Socket.IO-Client-Swift: 7055c89b7a9926b343194c4cac75998329c4a95a
+  Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
 
-PODFILE CHECKSUM: 686ec9d4fd155ea0ecd1e90cb4da8f0f18f3467d
+PODFILE CHECKSUM: d9c7505969eba2a53306be37c2d954ade132105e
 
 COCOAPODS: 1.2.1

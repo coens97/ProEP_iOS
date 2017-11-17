@@ -1,3 +1,4 @@
 target 'Show me'
 use_frameworks!
 pod 'GPUHaishinKit', '~> 1.2.0'
+pod 'Socket.IO-Client-Swift', '~> 13.0.1'
