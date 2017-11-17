@@ -36,6 +36,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
     var socketClient:SocketIOClient?
     var timer = Timer()
     var locationManager = CLLocationManager()
+    let manager = SocketManager(socketURL: URL(string: Preference.defaultInstance.socketUri!)!, config: [.log(true), .compress])
     
     var output:GPUImageRawDataOutput!
     
@@ -139,7 +140,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
     }
     
     func runSocket() {
-        let manager = SocketManager(socketURL: URL(string: Preference.defaultInstance.socketUri!)!, config: [.log(true), .compress])
+        
         let socketClient = manager.defaultSocket
         
         socketClient.on(clientEvent: .connect) {data, ack in
@@ -181,6 +182,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
         print(coord.longitude)
         if streaming {
             let json =  ["location": ["long": coord.longitude.magnitude, "lat": coord.latitude.magnitude]]
+            print(json)
             socketClient?.emit("phonemeta", json) // send location
         }
     }
