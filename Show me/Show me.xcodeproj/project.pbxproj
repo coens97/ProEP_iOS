@@ -19,6 +19,8 @@
 		BCDE89141FAA5D3400370128 /* Show_meTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE89131FAA5D3400370128 /* Show_meTests.swift */; };
 		BCDE891F1FAA5D3400370128 /* Show_meUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE891E1FAA5D3400370128 /* Show_meUITests.swift */; };
 		BCDE892D1FAA61E400370128 /* ControllerStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE892C1FAA61E400370128 /* ControllerStream.swift */; };
+		D15A58151FDEC830007C7C82 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15A58141FDEC830007C7C82 /* Singleton.swift */; };
+		D170C7DC1FD85CC500A9484E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D170C7DB1FD85CC500A9484E /* LoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		BCDE891E1FAA5D3400370128 /* Show_meUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show_meUITests.swift; sourceTree = "<group>"; };
 		BCDE89201FAA5D3400370128 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCDE892C1FAA61E400370128 /* ControllerStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerStream.swift; sourceTree = "<group>"; };
+		D15A58141FDEC830007C7C82 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		D170C7DB1FD85CC500A9484E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 				BCDE890A1FAA5D3400370128 /* Info.plist */,
 				BCDE892C1FAA61E400370128 /* ControllerStream.swift */,
 				BC3BB4F61FAA7EC400CDDC9A /* Show me-Bridging-Header.h */,
+				D170C7DB1FD85CC500A9484E /* LoginController.swift */,
+				D15A58141FDEC830007C7C82 /* Singleton.swift */,
 			);
 			path = "Show me";
 			sourceTree = "<group>";
@@ -353,7 +359,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCDE89011FAA5D3400370128 /* ViewController.swift in Sources */,
+				D170C7DC1FD85CC500A9484E /* LoginController.swift in Sources */,
 				BCDE88FF1FAA5D3400370128 /* AppDelegate.swift in Sources */,
+				D15A58151FDEC830007C7C82 /* Singleton.swift in Sources */,
 				BCDE892D1FAA61E400370128 /* ControllerStream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,11 +531,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25M7AR6QR4;
+				DEVELOPMENT_TEAM = WF23SN72F5;
 				INFOPLIST_FILE = "Show me/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ninjacoders.Show-me";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Miyako.Show-me";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Show me/Show me-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -543,11 +551,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25M7AR6QR4;
+				DEVELOPMENT_TEAM = WF23SN72F5;
 				INFOPLIST_FILE = "Show me/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ninjacoders.Show-me";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Miyako.Show-me";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Show me/Show me-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

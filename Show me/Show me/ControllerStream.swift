@@ -36,7 +36,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
     var socketClient:SocketIOClient?
     var timer = Timer()
     var locationManager = CLLocationManager()
-    let manager = SocketManager(socketURL: URL(string: Preference.defaultInstance.socketUri!)!, config: [.log(true), .compress])
+//    let manager = SocketManager(socketURL: URL(string: Preference.defaultInstance.socketUri!)!, config: [.log(true), .compress])
     
     var output:GPUImageRawDataOutput!
     
@@ -141,7 +141,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
     
     func runSocket() {
         
-        self.socketClient = manager.defaultSocket
+        self.socketClient = Singleton.instance.manager.defaultSocket
         
         self.socketClient!.on(clientEvent: .connect) {data, ack in
             print("socket connected")
@@ -157,7 +157,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
             print(data)
             self.socketLabel!.text = "😓"
         }
-        self.socketClient!.connect()
+        //self.socketClient!.connect()
     }
     
     @objc func timerAction() {
