@@ -14,6 +14,7 @@ class LoginController: UIViewController {
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var usernameTxt: UITextField!
     @IBOutlet var passwordTxt: UITextField!
+    @IBOutlet var errorTxt: UILabel!
     var socketClient:SocketIOClient?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,16 +38,37 @@ class LoginController: UIViewController {
             print(data)
             self.statusLabel!.text = "😦"
         }
+        
+        self.socketClient!.on("login") {data, ack in
+            print("login")
+            let o = data[0] as! [String: Any]
+            if let succeed = o["succeed"] as! Bool? {
+                if succeed {
+                    self.performSegue(withIdentifier: "ShowStream", sender: nil)
+                }
+                else {
+                    print(data)
+                    if let message = o["message"] as! String? {
+                        self.errorTxt!.text = message
+                    }
+                }
+            }
+            else {
+                self.errorTxt!.text = "Received unexpected message"
+            }
+        }
         self.socketClient!.connect()
         
     }
     
     @IBAction func loginClicked(_ sender: Any) {
-        // get the text of the username and the password
-        // send login over socket
-        //socket manger: let manager = SocketManager(socketURL: URL(string: Preference.defaultInstance.socketUri!)!, config: [.log(true), .compress])
-        // make singleton in new file
+        let username = usernameTxt.text
+        let password = passwordTxt.text
+        self.errorTxt!.text = ""
         
+        let json =  ["name": username, "pass": password] // { name: 'asana', pass: 'ding ding ding' }
+        print(json)
+        socketClient!.emit("login", json)
     }
     
     

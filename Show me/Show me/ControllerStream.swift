@@ -143,6 +143,10 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
         
         self.socketClient = Singleton.instance.manager.defaultSocket
         
+        if (self.socketClient!.status == .connected) {
+            self.socketLabel!.text = "💯"
+        }
+        
         self.socketClient!.on(clientEvent: .connect) {data, ack in
             print("socket connected")
             self.socketLabel!.text = "💯"
