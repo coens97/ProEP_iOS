@@ -17,7 +17,7 @@ import CoreLocation
 struct Preference {
     static let defaultInstance:Preference = Preference()
     
-    var uri:String? = "rtmp://40.68.124.79:1984/show/"
+    var uri:String? = "rtmp://showmedocker.zapto.org:1984/show/"
 }
 
 class ControllerStream: UIViewController, CLLocationManagerDelegate{
