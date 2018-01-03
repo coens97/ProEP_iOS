@@ -17,9 +17,7 @@ import CoreLocation
 struct Preference {
     static let defaultInstance:Preference = Preference()
     
-    var uri:String? = "rtmp://40.68.124.79:1984/show"
-    var socketUri:String? = "http://40.68.124.79:1903/"
-    var streamName:String? = "stream"
+    var uri:String? = "rtmp://showmedocker.zapto.org:1984/show/"
 }
 
 class ControllerStream: UIViewController, CLLocationManagerDelegate{
@@ -36,6 +34,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
     var socketClient:SocketIOClient?
     var timer = Timer()
     var locationManager = CLLocationManager()
+    var streamName:String = "stream"
 //    let manager = SocketManager(socketURL: URL(string: Preference.defaultInstance.socketUri!)!, config: [.log(true), .compress])
     
     var output:GPUImageRawDataOutput!
@@ -102,11 +101,12 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
             self.videoLabel!.text = "🔴"
         }
         else {
-            streaming = true
-            startButton.setTitle("Stop", for:  UIControlState())
-            rtmpConnection?.addEventListener(Event.RTMP_STATUS, selector:#selector(ControllerStream.on(status:)), observer: self)
-            rtmpConnection?.connect(Preference.defaultInstance.uri!)
-            timer.invalidate()
+            startButton.setTitle("Starting...", for:  UIControlState())
+            if (streamName == "stream") {
+                socketClient!.emit("initStream")
+            } else { // reuse old uuid
+                startStream()
+            }
         }
     }
     
@@ -132,7 +132,7 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
             DispatchQueue.main.async {
                 self.videoLabel!.text = "💯"
             }
-            rtmpStream!.publish(Preference.defaultInstance.streamName!)
+            rtmpStream!.publish(self.streamName)
             break
         default:
             break
@@ -161,7 +161,29 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
             print(data)
             self.socketLabel!.text = "😓"
         }
+        
+        self.socketClient!.on("initStream") {data, ack in
+            self.startButton.setTitle("Failed...", for:  UIControlState())
+            print(data)
+            
+            let o = data[0] as! [String: Any]
+            if let succeed = o["succeed"] as! Bool? , let uuid = o["data"] as! String?{
+                if (succeed) {
+                    print(uuid)
+                    self.streamName = uuid
+                    self.startStream()
+                }
+            }
+        }
         //self.socketClient!.connect()
+    }
+    
+    func startStream() {
+        self.startButton.setTitle("Stop", for:  UIControlState())
+        self.rtmpConnection?.addEventListener(Event.RTMP_STATUS, selector:#selector(ControllerStream.on(status:)), observer: self)
+        self.rtmpConnection?.connect(Preference.defaultInstance.uri!)
+        self.timer.invalidate()
+        self.streaming = true
     }
     
     @objc func timerAction() {
@@ -182,8 +204,6 @@ class ControllerStream: UIViewController, CLLocationManagerDelegate{
         let locationArray = locations as NSArray
         let locationObj = locationArray.lastObject as! CLLocation
         let coord = locationObj.coordinate
-        print(coord.latitude)
-        print(coord.longitude)
         if streaming {
             let json =  ["location": ["long": coord.longitude.magnitude, "lat": coord.latitude.magnitude]]
             print(json)

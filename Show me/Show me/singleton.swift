@@ -15,5 +15,5 @@ final class Singleton  {
     static let instance = Singleton()
     
     // local variable
-    let manager = SocketManager(socketURL: URL(string: "http://40.68.124.79:1903/")!, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: URL(string: "http://showmedocker.zapto.org:1903/")!, config: [.log(true), .compress])
 }
