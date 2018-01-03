@@ -21,6 +21,7 @@
 		BCDE892D1FAA61E400370128 /* ControllerStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE892C1FAA61E400370128 /* ControllerStream.swift */; };
 		D15A58151FDEC830007C7C82 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15A58141FDEC830007C7C82 /* Singleton.swift */; };
 		D170C7DC1FD85CC500A9484E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D170C7DB1FD85CC500A9484E /* LoginController.swift */; };
+		D1F2CCB71FFD1E2100A64550 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F2CCB61FFD1E2100A64550 /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		BCDE892C1FAA61E400370128 /* ControllerStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerStream.swift; sourceTree = "<group>"; };
 		D15A58141FDEC830007C7C82 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		D170C7DB1FD85CC500A9484E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		D1F2CCB61FFD1E2100A64550 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				BC3BB4F61FAA7EC400CDDC9A /* Show me-Bridging-Header.h */,
 				D170C7DB1FD85CC500A9484E /* LoginController.swift */,
 				D15A58141FDEC830007C7C82 /* Singleton.swift */,
+				D1F2CCB61FFD1E2100A64550 /* SignUpViewController.swift */,
 			);
 			path = "Show me";
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F2CCB71FFD1E2100A64550 /* SignUpViewController.swift in Sources */,
 				BCDE89011FAA5D3400370128 /* ViewController.swift in Sources */,
 				D170C7DC1FD85CC500A9484E /* LoginController.swift in Sources */,
 				BCDE88FF1FAA5D3400370128 /* AppDelegate.swift in Sources */,
