@@ -10,7 +10,8 @@ import UIKit
 import SocketIO
 
 class SignUpViewController: UIViewController {
-
+    @IBOutlet weak var Login: UIButton!
+    
 
         // Do any additional setup after loading the view.
     
@@ -40,7 +41,6 @@ class SignUpViewController: UIViewController {
     }
     
     
-    
     override func viewWillAppear(_ animated: Bool) {
         
     }
@@ -51,29 +51,38 @@ class SignUpViewController: UIViewController {
     }
     
     func runSocket() {
+        
         self.socketClient = Singleton.instance.manager.defaultSocket
         
-        self.socketClient!.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-            self.statusLabel!.text = "✅"
+        if (self.socketClient!.status == .connected) {
+            self.statusLabel!.text = "💯"
         }
         
-        self.socketClient!.on(clientEvent: .disconnect) {data, ack in
-            print("socket disconnected")
-            self.statusLabel!.text = "🚫"
-        }
-        self.socketClient!.on(clientEvent: .error) {data, ack in
-            print("socket error")
-            print(data)
-            self.statusLabel!.text = "😦"
-        }
+//        self.socketClient!.on(clientEvent: .connect) {data, ack in
+//            print("socket connected")
+//            self.statusLabel!.text = "✅"
+//        }
+//
+//        self.socketClient!.on(clientEvent: .disconnect) {data, ack in
+//            print("socket disconnected")
+//            self.statusLabel!.text = "🚫"
+//        }
+//        self.socketClient!.on(clientEvent: .error) {data, ack in
+//            print("socket error")
+//            print(data)
+//            self.statusLabel!.text = "😦"
+//        }
         
 self.socketClient!.on("register") {data, ack in
             print("register")
            let o = data[0] as! [String: Any]
             if let succeed = o["succeed"] as! Bool? {
                if succeed {
-                   self.performSegue(withIdentifier: "ShowStream", sender: nil)
+                  // self.performSegue(withIdentifier: "ShowStream", sender: nil)
+                print(data)
+                if let message = o["message"] as! String? {
+                    self.errorTest!.text = "Register Succeed!"
+                }
                }
                else {
                    print(data)
@@ -86,7 +95,7 @@ self.socketClient!.on("register") {data, ack in
                 self.errorTest!.text = "Received unexpected message"
             }
         }
-        self.socketClient!.connect()
+       // self.socketClient!.connect()
         
    }
 
