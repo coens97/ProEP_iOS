@@ -103,7 +103,7 @@
                                             <constraint firstAttribute="height" constant="30" id="ijF-lh-W4z"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="username"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Khh-MT-uf5">
                                         <rect key="frame" x="13" y="183" width="245" height="30"/>
@@ -111,7 +111,7 @@
                                             <constraint firstAttribute="width" constant="245" id="qZe-17-g3r"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ooY-ha-sVR">
                                         <rect key="frame" x="12.5" y="132.5" width="245" height="30"/>
@@ -120,7 +120,7 @@
                                             <constraint firstAttribute="height" constant="30" id="6iU-CV-hpO"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eO5-NO-es1">
                                         <rect key="frame" x="220" y="0.0" width="42" height="32"/>
@@ -174,11 +174,11 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xc-2h-ciW">
-                                <rect key="frame" x="276" y="55" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="284" y="50" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <segue destination="EZV-Jg-YBT" kind="show" id="VjQ-bO-TAe"/>
+                                    <segue destination="H5U-pA-EVO" kind="unwind" unwindAction="unwindToViewControllerLoginWithSegue:" id="uMb-yL-Pdu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -195,12 +195,12 @@
                         <outlet property="password" destination="Khh-MT-uf5" id="H14-tG-CPM"/>
                         <outlet property="statusLabel" destination="eO5-NO-es1" id="CQz-YF-sP5"/>
                         <outlet property="username" destination="CIU-hX-HKf" id="yyv-de-5JP"/>
-                        <segue destination="Sma-7i-gDO" kind="show" identifier="ShowStream" id="5Rz-IP-c5Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D92-TU-g7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="H5U-pA-EVO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-42914.400000000001" y="-13.043478260869566"/>
+            <point key="canvasLocation" x="87" y="1022"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="p4O-qb-rTs">
@@ -230,7 +230,7 @@
                                             <constraint firstAttribute="height" constant="30" id="Bho-ZV-YJq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="toA-04-3ch">
                                         <rect key="frame" x="13" y="80" width="245" height="30"/>
@@ -239,7 +239,7 @@
                                             <constraint firstAttribute="width" constant="245" id="vpu-RI-y3G"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="username"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leR-d7-Suu">
                                         <rect key="frame" x="103" y="195" width="63" height="45"/>
@@ -313,8 +313,8 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhm-WI-8Cc">
                                 <rect key="frame" x="257" y="55" width="65" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="sign up"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign up"/>
                                 <connections>
                                     <segue destination="2Uj-Qf-eCi" kind="show" id="86i-VE-Fuh"/>
                                 </connections>
@@ -340,7 +340,4 @@
             <point key="canvasLocation" x="87.200000000000003" y="131.78410794602701"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="5Rz-IP-c5Z"/>
-    </inferredMetricsTieBreakers>
 </document>

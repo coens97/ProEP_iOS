@@ -29,6 +29,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signup(_ sender: Any) {
+        self.view.endEditing(true)
         let name = username.text
         let mail = email.text
         let pass = password.text
@@ -80,9 +81,7 @@ self.socketClient!.on("register") {data, ack in
                if succeed {
                   // self.performSegue(withIdentifier: "ShowStream", sender: nil)
                 print(data)
-                if let message = o["message"] as! String? {
-                    self.errorTest!.text = "Register Succeed!"
-                }
+                self.errorTest!.text = "Register Succeed!"
                }
                else {
                    print(data)

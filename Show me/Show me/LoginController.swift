@@ -71,7 +71,8 @@ class LoginController: UIViewController {
         socketClient!.emit("login", json)
     }
     
-    
-    
+    @IBAction func unwindToViewControllerLogin(segue: UIStoryboardSegue) {
+        //nothing goes here
+    }
     
 }
